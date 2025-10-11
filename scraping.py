@@ -1,7 +1,12 @@
 import requests
+import re
 from bs4 import BeautifulSoup
-response=requests.get("https://www.google.com")
-#print(response.text)
-soup=BeautifulSoup(response.text, 'html.parser')
-title=soup.find('div').get_text()
-print(f"ページのタイトル{title}")
+def search_word(url,word):
+    response=requests.get(url)
+    #print(response.text)
+    soup=BeautifulSoup(response.text, 'html.parser')
+    elems = soup.find_all(string=re.compile(word))
+    return elems
+results=search_word("https://yahoo.co.jp","一休")
+for result in results:
+    print(results)
