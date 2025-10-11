@@ -7,6 +7,8 @@ def search_word(url,word):
     soup=BeautifulSoup(response.text, 'html.parser')
     elems = soup.find_all(string=re.compile(word))
     return elems
-results=search_word("https://yahoo.co.jp","一休")
-for result in results:
-    print(results)
+urls=["https://yahoo.co.jp","https://www.google.com"]
+for url in urls:
+    results=search_word(url,"一休")
+    for result in results:       
+        print(results,url)
